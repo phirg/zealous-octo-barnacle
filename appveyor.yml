@@ -12,6 +12,7 @@ clone_folder: c:\projects\zealous-octo-b
 
 init:
 - env
+- set PATH=C:\MinGW\bin;%PATH%
 
 environment:
   matrix:
@@ -20,7 +21,6 @@ environment:
   - GENERATOR: MinGW Makefiles
 
 install:
-- if "%GENERATOR%"=="MinGW Makefiles" cinst mingw
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
 
 before_build:
