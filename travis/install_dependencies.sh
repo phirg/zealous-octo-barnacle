@@ -3,8 +3,10 @@
 # exit as soon as a line fails, and print lines before executing it
 set -ev
 
-CURRENT_DIR=$(pwd)
-
+pwd
+CURRENT_DIR = $(pwd)
+echo "current dir is $CURRENT_DIR"
+ls
 
 # test if poco has to be built
 if [ $BUILD_POCO == true ]
@@ -12,7 +14,7 @@ then
 	echo "build poco option active"
     # get last poco via github
 	echo "getting the last poco release from github"
-    mkdir dependencies dependencies
+    mkdir dependencies
     cd dependencies
     git clone https://github.com/pocoproject/poco.git
     POCO_TAG_NAME = $(git describe --tags)
@@ -48,3 +50,4 @@ fi
 
 echo "going back to current dir"
 cd $CURRENT_DIR
+pwd
