@@ -4,7 +4,7 @@
 set -ev
 
 pwd
-CURRENT_DIR = $(pwd)
+CURRENT_DIR=$(pwd)
 echo "current dir is $CURRENT_DIR"
 ls
 
@@ -17,7 +17,7 @@ then
     mkdir dependencies
     cd dependencies
     git clone https://github.com/pocoproject/poco.git
-    POCO_TAG_NAME = $(git describe --tags)
+    POCO_TAG_NAME=$(git describe --tags)
     echo "checking out poco at tag: $POCO_TAG_NAME"
     git checkout $POCO_TAG_NAME
 
