@@ -12,8 +12,6 @@ then
     echo "build poco option active"
 
     echo "updating cmake to 3.0.0 (required for poco build) "
-    sudo apt-get remove cmake -q
-    sudo apt-get autoremove -q
     CMAKE_VERSION="3.0.0"
     wget -V
     echo "as soon as wget is 1.13, we should disable certificate checking"
