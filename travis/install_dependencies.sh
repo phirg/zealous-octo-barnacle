@@ -10,8 +10,17 @@ echo "current dir is $CURRENT_DIR"
 if [ $BUILD_POCO == true ]
 then
     echo "build poco option active"
-    echo "updating cmake to last version. 3.0.0 required for poco build. "
-    sudo apt-get install cmake
+
+    echo "updating cmake to 3.0.0 (required for poco build) "
+    sudo apt-get remove cmake -q
+    CMAKE_VERSION="3.0.0"
+    wget "http://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
+    tar xf "cmake-${CMAKE_VERSION}.tar.gz"
+    cd "cmake-${CMAKE_VERSION}"
+    make
+    sudo make install
+    cd ..
+
     # get last poco via github
     echo "getting the last poco release from github"
     mkdir dependencies
