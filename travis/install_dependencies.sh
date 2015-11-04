@@ -11,7 +11,7 @@ if [ $BUILD_POCO == true ]
 then
     echo "build poco option active"
     echo "updating cmake to last version. 3.0.0 required for poco build. "
-    apt-get install cmake
+    sudo apt-get install cmake
     # get last poco via github
     echo "getting the last poco release from github"
     mkdir dependencies
