@@ -16,7 +16,8 @@ then
     sudo apt-get autoremove -q
     CMAKE_VERSION="3.0.0"
     wget -V
-    wget "https://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
+    echo "as soon as wget is 1.13, we should disable certificate checking"
+    wget --no-check-certificate "https://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
     tar xf "cmake-${CMAKE_VERSION}.tar.gz"
     cd "cmake-${CMAKE_VERSION}"
     make
