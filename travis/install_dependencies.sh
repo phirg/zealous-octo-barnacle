@@ -16,11 +16,17 @@ then
     wget -V
     echo "as soon as wget is 1.13, we should disable certificate checking"
     wget --no-check-certificate "https://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
-    tar xvzf "cmake-${CMAKE_VERSION}.tar.gz"
+    tar xzf "cmake-${CMAKE_VERSION}.tar.gz"
     cd "cmake-${CMAKE_VERSION}"
     cmake .
-    make
+    make -j2
     sudo make install
+    # should set CMAKE_ROOT here?
+    echo "CMAKE_ROOT is $CMAKE_ROOT -- should probably be /usr/local/share/cmake-3.0/"
+    # check that the version in PATH is the right one
+    which cmake
+    cmake --version
+    
     cd ..
 
     # get last poco via github
