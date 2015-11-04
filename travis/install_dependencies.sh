@@ -19,7 +19,8 @@ then
     echo "as soon as wget is 1.13, we should disable certificate checking"
     wget --no-check-certificate "https://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
     tar xvzf "cmake-${CMAKE_VERSION}.tar.gz"
-    cd "cmake-${CMAKE_VERSION}"; ls -a
+    cd "cmake-${CMAKE_VERSION}"
+    cmake .
     make
     sudo make install
     cd ..
