@@ -21,10 +21,15 @@ then
     git checkout $POCO_TAG_NAME
 
     # build using cmake
-    echo "building poco with cmake" # which components? 
+    echo "building poco with cmake" # which components?
+    mkdir build; cd build
+    cmake .. -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_PDF=OFF -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_CRYPTO=OFF -DENABLE_DATA=OFF -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF -DENABLE_POCODOC=OFF
+    make help
+    make -j2
 
     # install using cmake
     echo "poco lib: cmake install"
+    sudo make install
 fi
 
 # if poco is not being built, then get it from the packages
