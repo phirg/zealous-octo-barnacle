@@ -11,8 +11,8 @@ if [ $BUILD_POCO == true ]
 then
     echo "build poco option active"
 
-    echo "updating cmake to 3.2.0 (3.0.0 required for poco build) "
-    CMAKE_VERSION_MAJOR_MINOR="3.2"
+    echo "updating cmake to 3.0.0 (3.0.0 required for poco build) "
+    CMAKE_VERSION_MAJOR_MINOR="3.0"
     CMAKE_VERSION_PATCH="0"
     CMAKE_VERSION="${CMAKE_VERSION_MAJOR_MINOR}.${CMAKE_VERSION_PATCH}"
     wget -V
@@ -25,7 +25,12 @@ then
     sudo make install
     # check that the version in PATH is the right one
     which cmake
-    cmake --version
+    if [ $TRAVIS_OS_NAME == linux ] 
+    then 
+        sudo cmake --version
+    else
+        cmake --version
+    fi
 
     cd ..
 
@@ -42,14 +47,25 @@ then
     # build using cmake
     echo "building poco with cmake" # which components?
     cd ..; mkdir poco-build; cd poco-build
-    cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
-    -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_NETSSL=OFF -DENABLE_NETSSL_WIN=OFF -DENABLE_CRYPTO=OFF \
-    -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_MYSQL=OFF -DENABLE_DATA_ODBC=OFF \
-    -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF \
-    -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF
-    make help
-    make -j2
-
+    if [ $TRAVIS_OS_NAME == linux ] 
+    then 
+        sudo cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
+        -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_NETSSL=OFF -DENABLE_NETSSL_WIN=OFF -DENABLE_CRYPTO=OFF \
+        -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_MYSQL=OFF -DENABLE_DATA_ODBC=OFF \
+        -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF \
+        -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF
+        make help
+        sudo make -j2
+    else
+        cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
+        -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_NETSSL=OFF -DENABLE_NETSSL_WIN=OFF -DENABLE_CRYPTO=OFF \
+        -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_MYSQL=OFF -DENABLE_DATA_ODBC=OFF \
+        -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF \
+        -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF
+        make help
+        make -j2
+    fi
+    
     # install using cmake
     echo "poco lib: cmake install"
     sudo make install
