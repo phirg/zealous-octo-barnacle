@@ -21,11 +21,15 @@ then
     cmake .
     make -j2
     sudo make install
-    # should set CMAKE_ROOT here?
-    echo "CMAKE_ROOT is $CMAKE_ROOT -- should probably be /usr/local/share/cmake-3.0/"
     # check that the version in PATH is the right one
     which cmake
-    cmake --version
+    if [ $TRAVIS_OS_NAME == linux ] 
+    then 
+        # avoiding some bug using sudo...
+        sudo cmake --version
+    else
+        cmake --version
+    fi
     
     cd ..
 
@@ -42,7 +46,20 @@ then
     # build using cmake
     echo "building poco with cmake" # which components?
     cd ..; mkdir poco-build; cd poco-build
-    cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_PDF=OFF -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_CRYPTO=OFF -DENABLE_DATA=OFF -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF -DENABLE_POCODOC=OFF
+    if [ $TRAVIS_OS_NAME == linux ] 
+    then 
+        sudo cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
+        -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_NETSSL=OFF -DENABLE_NETSSL_WIN=OFF -DENABLE_CRYPTO=OFF \
+        -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_MYSQL=OFF -ENABLE_DATA_ODBC=OFF \
+        -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF \
+        -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF
+    else
+        cmake ../poco -DENABLE_XML=OFF -DENABLE_JSON=OFF -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
+        -DENABLE_UTIL=ON -DENABLE_NET=OFF -DENABLE_NETSSL=OFF -DENABLE_NETSSL_WIN=OFF -DENABLE_CRYPTO=OFF \
+        -DENABLE_DATA=OFF -DENABLE_DATA_SQLITE=OFF -DENABLE_DATA_MYSQL=OFF -ENABLE_DATA_ODBC=OFF \
+        -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF \
+        -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF
+    fi
     make help
     make -j2
 
