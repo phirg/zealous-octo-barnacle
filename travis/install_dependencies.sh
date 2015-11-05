@@ -12,10 +12,12 @@ then
     echo "build poco option active"
 
     echo "updating cmake to 3.2.0 (3.0.0 required for poco build) "
-    CMAKE_VERSION="3.2.0"
+    CMAKE_VERSION_MAJOR_MINOR="3.2"
+    CMAKE_VERSION_PATCH="0"
+    CMAKE_VERSION="${CMAKE_VERSION_MAJOR_MINOR}.${CMAKE_VERSION_PATCH}"
     wget -V
     echo "as soon as wget is 1.13, we should disable certificate checking"
-    wget --no-check-certificate "https://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
+    wget --no-check-certificate "https://www.cmake.org/files/v${CMAKE_VERSION_MAJOR_MINOR}/cmake-${CMAKE_VERSION}.tar.gz"
     tar xzf "cmake-${CMAKE_VERSION}.tar.gz"
     cd "cmake-${CMAKE_VERSION}"
     cmake .
