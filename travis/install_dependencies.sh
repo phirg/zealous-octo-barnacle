@@ -70,7 +70,7 @@ then
     if [ $TRAVIS_OS_NAME == osx ] 
     then 
         echo "using homebrew"
-        brew install poco
+        brew install libpoco-dev
         echo "poco lib installed with homebrew" 
     fi
 fi
