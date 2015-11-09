@@ -14,9 +14,10 @@ if (Poco_FIND_QUIETLY)
 endif()
 
 find_package ( Poco 
-		${Poco_FIND_COMPONENTS}
-        ${_Poco_FIND_PARTS_QUIET}
-        ${_Poco_FIND_PARTS_REQUIRED}
+    COMPONENTS
+	${Poco_FIND_COMPONENTS}
+    ${_Poco_FIND_PARTS_QUIET}
+    ${_Poco_FIND_PARTS_REQUIRED}
 )
 
 if ( Poco_FOUND )
