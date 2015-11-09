@@ -10,7 +10,7 @@ find_package(Poco 1.3.6 COMPONENTS Foundation Util)
 
 if ( NOT Poco_FOUND )
     message ( WARNING "Poco not found")
-else
+else ( NOT Poco_FOUND )
     message ( STATUS "found Poco version: ${Poco_VERSION}" )
     message ( STATUS "includes are: ${Poco_INCLUDES} or ${Poco_INCLUDE_DIRS} or ${Poco_INCLUDE_DIRECTORIES}" )
     message ( STATUS "libraries are: ${Poco_LIBRARIES}" ) 
@@ -18,11 +18,11 @@ endif ( NOT Poco_FOUND )
     
 if ( NOT Foundation_FOUND )
     message (WARNING "Poco foundation not found")
-endif()
+endif ( NOT Foundation_FOUND )
 
 if ( NOT Util_FOUND )
     message (WARNING "Poco util not found")
-endif()
+endif ( NOT Util_FOUND )
 
 add_executable (hello hello.cpp)
 
