@@ -13,12 +13,18 @@ if (Poco_FIND_QUIETLY)
     set(_Poco_FIND_PARTS_QUIET QUIET)
 endif()
 
+set ( __store CMAKE_MODULE_PATH )
+unset ( CMAKE_MODULE_PATH ) 
+
 find_package ( Poco 
     COMPONENTS
 	${Poco_FIND_COMPONENTS}
     ${_Poco_FIND_PARTS_QUIET}
     ${_Poco_FIND_PARTS_REQUIRED}
 )
+
+set ( CMAKE_MODULE_PATH __store )
+unset ( __store )
 
 if ( Poco_FOUND )
     message ( STATUS "Poco found automatically" )
