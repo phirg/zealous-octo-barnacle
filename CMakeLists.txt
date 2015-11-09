@@ -16,11 +16,11 @@ else ( NOT Poco_FOUND )
     message ( STATUS "libraries are: ${Poco_LIBRARIES}" ) 
 endif ( NOT Poco_FOUND )
     
-if ( NOT Foundation_FOUND )
+if ( NOT PocoFoundation_FOUND )
     message (WARNING "Poco foundation not found")
 endif ( NOT Foundation_FOUND )
 
-if ( NOT Util_FOUND )
+if ( NOT PocoUtil_FOUND )
     message (WARNING "Poco util not found")
 endif ( NOT Util_FOUND )
 
