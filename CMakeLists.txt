@@ -18,11 +18,11 @@ endif ( NOT Poco_FOUND )
     
 if ( NOT PocoFoundation_FOUND )
     message (WARNING "Poco foundation not found")
-endif ( NOT Foundation_FOUND )
+endif ( NOT PocoFoundation_FOUND )
 
 if ( NOT PocoUtil_FOUND )
     message (WARNING "Poco util not found")
-endif ( NOT Util_FOUND )
+endif ( NOT PocoUtil_FOUND )
 
 add_executable (hello hello.cpp)
 
