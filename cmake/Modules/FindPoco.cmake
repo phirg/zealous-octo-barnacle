@@ -18,9 +18,8 @@ unset ( CMAKE_MODULE_PATH )
 
 find_package ( Poco 
     COMPONENTS
-	${Poco_FIND_COMPONENTS}
-    ${_Poco_FIND_PARTS_QUIET}
-    ${_Poco_FIND_PARTS_REQUIRED}
+    ${Poco_FIND_COMPONENTS}
+    QUIET
 )
 
 set ( CMAKE_MODULE_PATH __store )
