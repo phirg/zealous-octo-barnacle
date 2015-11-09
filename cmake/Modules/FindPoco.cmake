@@ -13,6 +13,7 @@ if (Poco_FIND_QUIETLY)
     set(_Poco_FIND_PARTS_QUIET QUIET)
 endif()
 
+# avoiding recursion
 set ( __store CMAKE_MODULE_PATH )
 unset ( CMAKE_MODULE_PATH ) 
 
@@ -120,7 +121,7 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 
 		# NOTE: anything else?
 
-	endif (_poco_lib STREQUAL "poco_lib-NOTFOUND")
+	endif (_poco_lib STREQUAL "_poco_lib-NOTFOUND")
 
 
     if ( NOT Poco${module}_FOUND )
