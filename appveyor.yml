@@ -6,6 +6,7 @@ branches:
 
 configuration: 
 - Release
+- RelWithDebInfo
 - Debug
 
 clone_folder: c:\projects\zealous-octo-b
@@ -22,6 +23,7 @@ environment:
 
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
+- sh "c:\projects\zealous-octo-b\appveyor\install_dependencies.win.sh"
 
 before_build:
 - cd c:\projects\zealous-octo-b
