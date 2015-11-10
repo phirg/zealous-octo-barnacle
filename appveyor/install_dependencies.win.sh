@@ -35,6 +35,7 @@ echo "path: $PATH"
 
 CMAKE_DIR=$(which cmake)
 echo "cmake is at: $CMAKE_DIR"
+CMAKE_DIR="$(dirname "$(dirname "$CMAKE_DIR")")"
 ls "$CMAKE_DIR"
 echo "copying poco cmake files to the right place: $CMAKE_DIR/modules"
 cp "$POCO_INSTALL_DEST/lib/cmake/*.*" "$CMAKE_DIR/modules"
