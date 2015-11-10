@@ -8,6 +8,7 @@ echo "getting the last poco release from github"
 mkdir dependencies
 cd dependencies
 git clone https://github.com/pocoproject/poco.git
+echo "Poco is now cloned. "
 cd poco
 
 REM now using msys to make things easier
@@ -15,7 +16,9 @@ sh -c "POCO_TAG_NAME=$(git describe --tags) ; git checkout $POCO_TAG_NAME"
 
 REM build using cmake
 echo "building poco with cmake" 
-cd ..; mkdir poco-build; cd poco-build
+cd .. 
+mkdir poco-build 
+cd poco-build
 
 echo "preparing install destination to %POCO_INSTALL_PREFIX%"
 echo "CMake generator is: %GENERATOR%"
