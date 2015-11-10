@@ -35,7 +35,7 @@ echo "Poco build done. "
 cmake --build . --target install --config "RelWithDebInfo"
 echo "Poco install done. "
 
-PATH="$POCO_INSTALL_DEST/bin:$PATH"
+export PATH="$POCO_INSTALL_DEST/bin:$PATH"
 echo "new path is: $PATH"
 
 cd $CURRENT_DIR
