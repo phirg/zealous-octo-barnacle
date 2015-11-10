@@ -1,7 +1,7 @@
 set CURRENT_DIR=%CD%
 echo "current dir is %CURRENT_DIR%"
 
-set POCO_INSTALL_PREFIX="%PROGRAMFILES%\Poco"
+set POCO_INSTALL_PREFIX=%PROGRAMFILES%\Poco
 
 REM get last poco via github
 echo "getting the last poco release from github"
