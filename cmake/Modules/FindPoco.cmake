@@ -4,6 +4,8 @@
 # search of the include directory and .lib files
 # unable to check the version for poco not supporting cmake. 
 
+set ( POCO_INSTALL_PREFIX CACHE PATH )
+
 set(_Poco_FIND_PARTS_REQUIRED)
 if (Poco_FIND_REQUIRED)
     set(_Poco_FIND_PARTS_REQUIRED REQUIRED)
@@ -21,6 +23,7 @@ find_package ( Poco
     COMPONENTS
     ${Poco_FIND_COMPONENTS}
     QUIET
+    PATHS "${POCO_INSTALL_PREFIX}/lib/cmake/Poco"
 )
 
 set ( CMAKE_MODULE_PATH __store )

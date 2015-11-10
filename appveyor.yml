@@ -30,7 +30,7 @@ before_build:
 - mkdir build
 - cd build
 - cmake --help
-- cmake -G"%GENERATOR%" ..
+- cmake -G"%GENERATOR%" .. -DPOCO_INSTALL_PREFIX="%PROGRAMFILES%\Poco"
 
 build_script:
 - cmake --build . --config %CONFIGURATION%
