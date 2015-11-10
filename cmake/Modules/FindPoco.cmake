@@ -104,7 +104,7 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 		# Create imported target Poco::${module}
 		add_library ( Poco::${module} UNKNOWN IMPORTED )
 	
-		set_target_properties ( Poco::${module} PROPERTY
+		set_target_properties ( Poco::${module} PROPERTIES
 		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
 		  IMPORTED_LOCATION "${_poco_lib}"
 		)
