@@ -104,13 +104,14 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 		# Create imported target Poco::${module}
 		add_library ( Poco::${module} UNKNOWN IMPORTED )
 	
-		set_target_properties ( Poco::${module} PROPERTIES
-		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
-		)
+#		set_target_properties ( Poco::${module} PROPERTY
+#		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
+#		)
 	
 		# Import target "Poco::${module}" 
 		set_property(TARGET Poco::${module} PROPERTIES
-		  IMPORTED_LOCATION _poco_lib
+		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
+		  IMPORTED_LOCATION ${_poco_lib}
 	    )
 
 		# NOTE: anything else to do?
