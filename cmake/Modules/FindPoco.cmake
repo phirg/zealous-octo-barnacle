@@ -116,7 +116,7 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 
 		# NOTE: anything else to do?
 
-	    set ( Poco${module}_FOUND "true" )
+	    set ( Poco${module}_FOUND True )
 
 	endif (_poco_lib STREQUAL "_poco_lib-NOTFOUND")
 endforeach ( module ${Poco_FIND_COMPONENTS} )
@@ -124,8 +124,10 @@ endforeach ( module ${Poco_FIND_COMPONENTS} )
 unset ( _poco_lib CACHE )
 unset ( _poco_include_root )
 
-if (_Poco_NOTFOUND_MESSAGE)
+if ( _Poco_NOTFOUND_MESSAGE )
     set(Poco_NOT_FOUND_MESSAGE "${_Poco_NOTFOUND_MESSAGE}")
     set(Poco_FOUND False)
-endif()
+else ( _Poco_NOTFOUND_MESSAGE ) 
+    set(Poco_FOUND True)
+endif ( _Poco_NOTFOUND_MESSAGE )
 
