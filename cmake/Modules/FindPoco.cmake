@@ -40,13 +40,12 @@ elseif ( )
     set ( _poco_components ${Poco_FIND_COMPONENTS} )
 endif ( )
 
-set ( _Poco_NOTFOUND_MESSAGE )
+set ( _Poco_NOTFOUND_MESSAGE "" )
 
 # looking for general paths
 
 # safety measure. find_file and find_library write results in CACHE!
 unset (_poco_include_root CACHE)
-##unset (poco_libs CACHE)
 
 # variables to be found in cache
 set (
@@ -105,7 +104,7 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 		add_library ( Poco::${module} UNKNOWN IMPORTED )
 	
 		set_target_properties ( Poco::${module} PROPERTIES
-		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
+		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/Poco/${module}"
 		  IMPORTED_LOCATION "${_poco_lib}"
 		)
 	
