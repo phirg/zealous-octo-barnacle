@@ -38,13 +38,15 @@ echo "Poco install done. "
 PATH="$POCO_INSTALL_DEST/bin:$PATH"
 echo "new path is: $PATH"
 
+echo "cmake root could be: $(cmake -E echo \${CMAKE_ROOT})"
+cmake -E copy_directory $POCO_INSTALL_DEST"/lib/cmake "\${CMAKE_ROOT}"/modules
 CMAKE_DIR=$(which cmake)
-echo "cmake is at: $CMAKE_DIR that can be de-symlinked to $(readlink -f "$CMAKE_DIR")"
-CMAKE_DIR="$(dirname "$(readlink -f "$CMAKE_DIR")")"
-ls "$CMAKE_DIR"/modules
-echo "copying poco cmake files to the right place: $CMAKE_DIR/modules"
-cp "$POCO_INSTALL_DEST"/lib/cmake/*.* "$CMAKE_DIR"/modules
-ls "$CMAKE_DIR"/modules
+echo "cmake is at: $CMAKE_DIR"
+CMAKE_DIR="$(dirname "$(dirname "$CMAKE_DIR")")"
+ls "$CMAKE_DIR"/share
+# echo "copying poco cmake files to the right place: $CMAKE_DIR/modules"
+# cp "$POCO_INSTALL_DEST"/lib/cmake/*.* "$CMAKE_DIR"/modules
+# ls "$CMAKE_DIR"/modules
 
 cd $CURRENT_DIR
 pwd
