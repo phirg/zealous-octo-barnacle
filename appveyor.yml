@@ -23,8 +23,7 @@ environment:
 
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
-- echo "cheese"
-- "c:\projects\zealous-octo-b\appveyor\install_dependencies.bat"
+- c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
 - echo %PATH%
 
 before_build:
