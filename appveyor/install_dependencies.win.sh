@@ -30,10 +30,10 @@ echo "Poco build done. "
 cmake --build . --target install --config "RelWithDebInfo"
 echo "Poco install done. "
 
-PATH="$POCO_INSTALL_PREFIX/bin;$PATH"
+PATH="$POCO_INSTALL_DEST/bin;$PATH"
 echo "path: $PATH"
 
-CMAKE_DIR=$(whereis cmake)
+CMAKE_DIR=$(which cmake)
 echo "cmake is at: $CMAKE_DIR"
 ls "$CMAKE_DIR"
 echo "copying poco cmake files to the right place: $CMAKE_DIR/modules"
