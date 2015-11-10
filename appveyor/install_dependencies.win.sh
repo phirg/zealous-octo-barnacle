@@ -24,7 +24,7 @@ cmake ../poco -DENABLE_XML=ON -DENABLE_JSON=ON -DENABLE_MONGODB=OFF -DENABLE_PDF
     -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF -G"$GENERATOR" 
 cmake --build . --config "RelWithDebInfo"
 echo "Poco build done. "
-cmake --install
+cmake --build . --target install --config "RelWithDebInfo"
 echo "Poco install done. "
 
 echo "path: $PATH"
