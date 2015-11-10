@@ -24,7 +24,8 @@ environment:
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
 - "c:\projects\zealous-octo-b\appveyor\install_dependencies.bat"
-- echo "path: %PATH%" ; echo "poco installed at: %POCO_INSTALL_PREFIX%"
+- echo "path: %PATH%" 
+- echo "poco installed at: %POCO_INSTALL_PREFIX%"
 
 before_build:
 - cd c:\projects\zealous-octo-b
