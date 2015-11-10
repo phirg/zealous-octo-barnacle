@@ -84,7 +84,6 @@ else ( _poco_include_root STREQUAL "_poco_include_root-NOTFOUND" )
 endif ( _poco_include_root STREQUAL "_poco_include_root-NOTFOUND" )
 
 
-
 foreach ( module ${Poco_FIND_COMPONENTS} )
     message ( STATUS "Looking for poco component: ${module}" )
 
@@ -102,34 +101,27 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 		    "Poco${module} lib found: ${_poco_lib}"
 		    )
 
-		# set libs
-		# set headers
-	#	# Create imported target Poco::Util
-	#	add_library(Poco::${module} SHARED IMPORTED)
-	#
-	#	set_target_properties(Poco::Util PROPERTIES
-	#	  INTERFACE_INCLUDE_DIRECTORIES "/home/philippe/prog/poco-poco-1.6.0-release/Util/include"
-	#	  INTERFACE_LINK_LIBRARIES "Poco::JSON;Poco::XML;Poco::Foundation"
-	#	)
-	#
-	#	# Import target "Poco::Util" for configuration "RelWithDebInfo"
-	#	set_property(TARGET Poco::Util APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-	#	set_target_properties(Poco::Util PROPERTIES
-	#	  IMPORTED_LOCATION_RELWITHDEBINFO "/home/philippe/prog/poco-build-1.6.0/lib/libPocoUtil.so.30"
-	#	  IMPORTED_SONAME_RELWITHDEBINFO "libPocoUtil.so.30"
-	#	  )
+		# Create imported target Poco::${module}
+		add_library ( Poco::${module} UNKNOWN IMPORTED )
+	
+		set_target_properties ( Poco::${module} PROPERTIES
+		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/${module}"
+		)
+	
+		# Import target "Poco::${module}" 
+		set_property(TARGET Poco::${module} PROPERTIES
+		  IMPORTED_LOCATION _poco_lib
+	    )
 
-		# NOTE: anything else?
+		# NOTE: anything else to do?
+
+	    set ( Poco${module}_FOUND "true" )
 
 	endif (_poco_lib STREQUAL "_poco_lib-NOTFOUND")
+endforeach ( module ${Poco_FIND_COMPONENTS} )
 
-
-    if ( NOT Poco${module}_FOUND )
-    endif ( )
-endforeach ( )
-
-unset (_poco_lib CACHE)
-
+unset ( _poco_lib CACHE )
+unset ( _poco_include_root )
 
 if (_Poco_NOTFOUND_MESSAGE)
     set(Poco_NOT_FOUND_MESSAGE "${_Poco_NOTFOUND_MESSAGE}")
