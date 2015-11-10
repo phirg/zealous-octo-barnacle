@@ -39,4 +39,4 @@ PATH="$POCO_INSTALL_DEST/bin:$PATH"
 echo "new path is: $PATH"
 
 cd $CURRENT_DIR
-cmake -P appveyor/convenience.cmake
+cmake -DPOCO_INSTALL_DEST:PATH="$PROGRAMFILES\Poco" -P appveyor/convenience.cmake
