@@ -3,6 +3,11 @@
 CURRENT_DIR=$(pwd)
 echo "current dir is $CURRENT_DIR"
 
+cd "$PROGRAMFILES"
+mkdir Poco ; cd Poco
+POCO_INSTALL_DEST=$(pwd)
+cd "$CURRENT_DIR"
+
 # get last poco via github
 echo "getting the last poco release from github"
 mkdir dependencies
@@ -16,7 +21,7 @@ git checkout $POCO_TAG_NAME
 # build using cmake
 echo "building poco with cmake" # which components?
 cd ..; mkdir poco-build; cd poco-build
-POCO_INSTALL_DEST=$PROGRAMFILES/Poco
+
 echo "preparing install destination to $POCO_INSTALL_DEST"
 echo "CMake generator is: $GENERATOR"
 cmake ../poco -DENABLE_XML=ON -DENABLE_JSON=ON -DENABLE_MONGODB=OFF -DENABLE_PDF=OFF \
@@ -30,16 +35,16 @@ echo "Poco build done. "
 cmake --build . --target install --config "RelWithDebInfo"
 echo "Poco install done. "
 
-PATH="$POCO_INSTALL_DEST/bin;$PATH"
-echo "path: $PATH"
+PATH="$POCO_INSTALL_DEST/bin:$PATH"
+echo "new path is: $PATH"
 
 CMAKE_DIR=$(which cmake)
-echo "cmake is at: $CMAKE_DIR"
-CMAKE_DIR="$(dirname "$(dirname "$CMAKE_DIR")")"
-ls "$CMAKE_DIR"/share
-echo "copying poco cmake files to the right place: $CMAKE_DIR/share/modules"
+echo "cmake is at: $CMAKE_DIR that can be de-symlinked to $(readlink -f "$CMAKE_DIR")"
+CMAKE_DIR="$(dirname "$(readlink -f "$CMAKE_DIR")")"
+ls "$CMAKE_DIR"/modules
+echo "copying poco cmake files to the right place: $CMAKE_DIR/modules"
 cp "$POCO_INSTALL_DEST"/lib/cmake/*.* "$CMAKE_DIR"/modules
-ls "$CMAKE_DIR"/share/modules
+ls "$CMAKE_DIR"/modules
 
 cd $CURRENT_DIR
 pwd
