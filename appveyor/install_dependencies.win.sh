@@ -3,10 +3,7 @@
 CURRENT_DIR=$(pwd)
 echo "current dir is $CURRENT_DIR"
 
-cd "$PROGRAMFILES"
-mkdir Poco ; cd Poco
-POCO_INSTALL_PREFIX=$(pwd)
-cd "$CURRENT_DIR"
+POCO_INSTALL_PREFIX="/c/Program Files/Poco"
 
 # get last poco via github
 echo "getting the last poco release from github"
