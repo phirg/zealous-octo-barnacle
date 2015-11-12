@@ -14,7 +14,7 @@ clone_folder: c:\projects\zealous-octo-b
 init:
 - env
 - set POCO_INSTALL_PREFIX=%PROGRAMFILES%\Poco
-- set PATH=C:\MinGW\bin;%PATH%;"%POCO_INSTALL_PREFIX%\bin"
+- set PATH=C:\MinGW\bin;%PATH%;%POCO_INSTALL_PREFIX%\bin
 
 environment:
   matrix:
