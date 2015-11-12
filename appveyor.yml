@@ -24,7 +24,10 @@ environment:
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
-- echo %PATH%
+- ps: $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
+- ps: $newPath=$oldPath+";C:\$ENV:POCO_INSTALL_PREFIX\bin"
+- ps: Write-Host $newPath
+- ps: Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 before_build:
 - cd c:\projects\zealous-octo-b
@@ -37,6 +40,7 @@ build_script:
 - cmake --build . --config %CONFIGURATION%
 
 test_script:
+- echo %PATH%
 - ctest -v --build-config %CONFIGURATION%
 
 on_finish:
