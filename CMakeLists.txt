@@ -5,8 +5,7 @@ project (HELLO)
 # set search path for project specific cmake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-# find_package(Poco 1.3.6 COMPONENTS Foundation Util REQUIRED)
-find_package(Poco 1.3.6 COMPONENTS Foundation Util)
+find_package( Poco 1.3.6 COMPONENTS Foundation Util REQUIRED )
 
 if ( NOT Poco_FOUND )
     message ( WARNING "Poco not found")
@@ -24,6 +23,8 @@ if ( NOT PocoUtil_FOUND )
 endif ( NOT PocoUtil_FOUND )
 
 add_executable (hello hello.cpp)
+
+target_link_libraries(hello Poco::Foundation Poco::Util)
 
 message ( STATUS "cmake running....")
 
