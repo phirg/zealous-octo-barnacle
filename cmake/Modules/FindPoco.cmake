@@ -115,7 +115,7 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 	    message( STATUS "Poco::${module} headers are at: ${_poco_include_module}" )
 	
 		set_target_properties ( Poco::${module} PROPERTIES
-		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_module}"
+		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}"
 		  IMPORTED_LOCATION "${_poco_lib}"
 		)
 	
