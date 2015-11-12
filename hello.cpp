@@ -1,10 +1,11 @@
 #include <iostream>
 
-#include "Util/Application.h"
-#include "Util/Option.h"
-#include "Util/OptionSet.h"
-#include "Util/HelpFormatter.h"
-#include "Util/AbstractConfiguration.h"
+// Poco
+#include "Application.h"
+#include "Option.h"
+#include "OptionSet.h"
+#include "HelpFormatter.h"
+#include "AbstractConfiguration.h"
 
 using Poco::Util::Application;
 using Poco::Util::Option;

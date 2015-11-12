@@ -102,9 +102,20 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 
 		# Create imported target Poco::${module}
 		add_library ( Poco::${module} UNKNOWN IMPORTED )
+		
+		
+		# check include tree
+		unset ( _poco_include_module CACHE )
+		find_path ( 
+            _poco_include_module
+            ${module}.h
+            "${_poco_include_root}/Poco" "${_poco_include_root}/Poco/${module}" )
+		
+	
+	    message( STATUS "Poco::${module} headers are at: ${_poco_include_module}" )
 	
 		set_target_properties ( Poco::${module} PROPERTIES
-		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_root}/Poco"
+		  INTERFACE_INCLUDE_DIRECTORIES "${_poco_include_module}"
 		  IMPORTED_LOCATION "${_poco_lib}"
 		)
 	
@@ -115,6 +126,8 @@ foreach ( module ${Poco_FIND_COMPONENTS} )
 	endif (_poco_lib STREQUAL "_poco_lib-NOTFOUND")
 endforeach ( module ${Poco_FIND_COMPONENTS} )
 
+# cleaning...
+unset ( _poco_include_module CACHE )
 unset ( _poco_lib CACHE )
 unset ( _poco_include_root )
 
