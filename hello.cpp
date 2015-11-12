@@ -148,7 +148,7 @@ protected:
         printProperties("");
 
 
-        return Application::EXIT_SOFTWARE;
+        return Application::EXIT_OK;
     }
 
     void printProperties(const std::string& base)
