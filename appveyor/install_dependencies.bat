@@ -16,7 +16,7 @@ REM now using msys to make things easier
 sh -c "POCO_TAG_NAME=$(git describe --tags) ; git checkout $POCO_TAG_NAME"
 
 REM build using cmake
-echo "building poco with cmake" 
+echo "building poco with cmake, configuration: %CONFIGURATION%" 
 cd .. 
 mkdir poco-build 
 cd poco-build
@@ -29,9 +29,9 @@ cmake ../poco -DENABLE_XML=ON -DENABLE_JSON=ON -DENABLE_MONGODB=OFF -DENABLE_PDF
     -DENABLE_SEVENZIP=OFF -DENABLE_ZIP=OFF -DENABLE_APACHECONNECTOR=OFF -DENABLE_CPPPARSER=OFF ^
     -DENABLE_POCODOC=OFF -DENABLE_PAGECOMPILER=OFF -DENABLE_PAGECOMPILER_FILE2PAGE=OFF ^
     -DCMAKE_INSTALL_PREFIX="%POCO_INSTALL_PREFIX%" -G"%GENERATOR%" 
-cmake --build . --config "RelWithDebInfo"
+cmake --build . --config %CONFIGURATION%
 echo "Poco build done. "
-cmake --build . --target install --config "RelWithDebInfo"
+cmake --build . --target install --config %CONFIGURATION%
 echo "Poco install done. "
 
 REM %PATH% has to be modified to take into account poco .dlls
