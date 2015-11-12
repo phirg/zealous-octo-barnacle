@@ -13,7 +13,8 @@ clone_folder: c:\projects\zealous-octo-b
 
 init:
 - env
-- set PATH=C:\MinGW\bin;%PATH%
+- set POCO_INSTALL_PREFIX=%PROGRAMFILES%\Poco
+- set PATH=C:\MinGW\bin;%PATH%;"%POCO_INSTALL_PREFIX%\bin"
 
 environment:
   matrix:
@@ -24,13 +25,9 @@ environment:
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
-- ps: $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
-- ps: $newPath=$oldPath+";$ENV:POCO_INSTALL_PREFIX\bin"
-- ps: Write-Host $newPath
-- ps: Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 before_build:
-- cd c:\projects\zealous-octo-b
+- cd %APPVEYOR_BUILD_FOLDER%
 - mkdir build
 - cd build
 - cmake --help
