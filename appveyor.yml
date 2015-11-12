@@ -25,7 +25,7 @@ install:
 - if "%GENERATOR%"=="MinGW Makefiles" del "%ProgramFiles(x86)%\Git\bin\sh.exe"
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
 - ps: $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
-- ps: $newPath=$oldPath+";C:\$ENV:POCO_INSTALL_PREFIX\bin"
+- ps: $newPath=$oldPath+";$ENV:POCO_INSTALL_PREFIX\bin"
 - ps: Write-Host $newPath
 - ps: Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
