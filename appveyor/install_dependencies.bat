@@ -33,5 +33,5 @@ echo "Poco build done. "
 cmake --build . --target install --config "RelWithDebInfo"
 echo "Poco install done. "
 
-set PATH=%PATH%;"%POCO_INSTALL_PREFIX%\bin"
+REM %PATH% has to be modified to take into account poco .dlls
 cd %CURRENT_DIR%
