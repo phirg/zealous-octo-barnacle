@@ -7,6 +7,7 @@
 #include "Poco/Util/HelpFormatter.h"
 #include "Poco/Util/AbstractConfiguration.h"
 
+#include "Poco/Version.h"
 #include "Poco/NumberFormatter.h"
 
 using Poco::Util::Application;
