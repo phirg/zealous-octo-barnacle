@@ -18,12 +18,13 @@ init:
 
 environment:
   matrix:
-  - GENERATOR: Visual Studio 11 2012 Win64
-  - GENERATOR: Visual Studio 11 2012
+#  - GENERATOR: Visual Studio 11 2012 Win64
+#  - GENERATOR: Visual Studio 11 2012
   - GENERATOR: MinGW Makefiles
 
 install:
-- if "%GENERATOR%"=="MinGW Makefiles" del "%PROGRAMFILES%\Git\bin\sh.exe"
+- if "%GENERATOR%"=="MinGW Makefiles" ( del "%PROGRAMFILES%\Git\bin\sh.exe" )
+- ls "%PROGRAMFILES%\Git\bin"
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
 
 before_build:
