@@ -23,10 +23,8 @@ environment:
   - GENERATOR: MinGW Makefiles
 
 install:
-- if "%GENERATOR%"=="MinGW Makefiles" ( set SH_COMMAND=gulash ) else (set SH_COMMAND=sh )
-- if "%GENERATOR%"=="MinGW Makefiles" ( move "%PROGRAMFILES%\Git\usr\bin\sh.exe" "%PROGRAMFILES%\Git\usr\bin\%SH_COMMAND%.exe")
-- if "%GENERATOR%"=="MinGW Makefiles" ( set PATH=%PATH%;C:\Program Files (x86)\Windows Kits\10\bin\x86 )
-- c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
+- %APPVEYOR_BUILD_FOLDER%\appveyor\setMinGW.bat
+- %APPVEYOR_BUILD_FOLDER%\appveyor\install_dependencies.bat
 
 before_build:
 - cd %APPVEYOR_BUILD_FOLDER%
