@@ -7,7 +7,7 @@
 #include "Poco/Util/HelpFormatter.h"
 #include "Poco/Util/AbstractConfiguration.h"
 
-#include "Poco/Version.h"
+#include "Poco/Version.h" // FIXME to be included only for version >= 1.4.0
 #include "Poco/NumberFormatter.h"
 
 using Poco::Util::Application;
@@ -128,7 +128,6 @@ protected:
         return "0.1";
     }
     
-    // FIXME: only working if poco version >= 1.4.1p1 !
     std::string pocoVersion()
     {
         std::string pocoV;
