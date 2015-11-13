@@ -128,6 +128,7 @@ protected:
         return "0.1";
     }
     
+    // FIXME: only working if poco version >= 1.4.1p1 !
     std::string pocoVersion()
     {
         std::string pocoV;
