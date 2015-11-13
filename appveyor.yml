@@ -23,9 +23,7 @@ environment:
   - GENERATOR: MinGW Makefiles
 
 install:
-- if "%GENERATOR%"=="MinGW Makefiles" ( del "%PROGRAMFILES%\Git\usr\bin\sh.exe" )
-- ls "%PROGRAMFILES%\Git\bin"
-- ls "%PROGRAMFILES%\Git\usr\bin"
+- if "%GENERATOR%"=="MinGW Makefiles" ( move "%PROGRAMFILES%\Git\usr\bin\sh.exe" "%PROGRAMFILES%\Git\usr\bin\gulash.exe")
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
 
 before_build:
