@@ -7,6 +7,8 @@
 #include "Poco/Util/HelpFormatter.h"
 #include "Poco/Util/AbstractConfiguration.h"
 
+#include "Poco/NumberFormatter.h"
+
 using Poco::Util::Application;
 using Poco::Util::Option;
 using Poco::Util::OptionSet;
@@ -120,6 +122,46 @@ protected:
         loadConfiguration(value);
     }
 
+    std::string version()
+    {
+        return "0.1";
+    }
+    
+    std::string pocoVersion()
+    {
+        std::string pocoV;
+        int patch = (POCO_VERSION >> 8) & 0xFF;
+        int minor = (POCO_VERSION >> 16) & 0xFF;
+        int major = (POCO_VERSION >> 24) & 0xFF;
+        
+        pocoV = Poco::NumberFormatter::format(major) + "."
+              + Poco::NumberFormatter::format(minor) + "."
+              + Poco::NumberFormatter::format(patch) ;
+              
+        switch (POCO_VERSION & 0xF0)
+        {
+        case 0xA0:
+            pocoV = pocoV + "(alpha" + Poco::NumberFormatter::format(POCO_VERSION & 0x0F) + ")";
+            break;
+        case 0xB0:
+            pocoV = pocoV + "(beta" + Poco::NumberFormatter::format(POCO_VERSION & 0x0F) + ")";
+            break;
+        case 0xD0:
+            pocoV = pocoV + "(dev" + Poco::NumberFormatter::format(POCO_VERSION & 0x0F) + ")";
+            break;
+        case 0x00:
+            if ((POCO_VERSION & 0x0F) == 0 )
+                pocoV = pocoV + "(stable)";
+            // else: unknown
+            break;
+        default:
+            // unknown
+            break;
+        }
+        
+        return pocoV;
+    }
+
     void displayHelp()
     /// display the help message requested by the option 'help' (short: 'h')
     /// using the HelpFormatter class.
@@ -128,9 +170,28 @@ protected:
         helpFormatter.setCommand(commandName());
         helpFormatter.setUsage("[options]");
         helpFormatter.setHeader(
-            "Hello version 0.1 - test application");
+            "Hello version " + version() + " - test application");
         helpFormatter.format(std::cout);
     }
+
+    std::string about()
+    /// display various infos -- including dependencies version
+    {
+        return std::string("Hello version ") + version() + " - test application\n"
+            "Copyright (c) 2013-2015, Opticalp.fr and contributors\n"
+            "MIT License, see http://www.opensource.org/licenses/MIT\n\n" 
+            "Proudly using: \n"
+            " - "
+            "Poco libraries (" 
+            + pocoVersion() 
+            + ") http://pocoproject.org, SPDX-License-Identifier: BSL-1.0 license" ;
+    }
+    
+    void displayAbout()
+    {
+        std::cout << about() << endl;        
+    }
+
 
     int main(const std::vector<std::string>& args)
     /// The application's main logic.
@@ -147,7 +208,8 @@ protected:
         logger().information("Application properties:");
         printProperties("");
 
-
+        logger().information(about());
+        
         return Application::EXIT_OK;
     }
 
