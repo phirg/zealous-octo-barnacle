@@ -30,7 +30,7 @@ environment:
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" ( set SH_COMMAND=gulash.exe ) else ( set SH_COMMAND=sh.exe )
 - if "%GENERATOR%"=="MinGW Makefiles" ( move "%PROGRAMFILES%\Git\usr\bin\sh.exe" "%PROGRAMFILES%\Git\usr\bin\%SH_COMMAND%" )
-- cmd: %APPVEYOR_BUILD_FOLDER%\appveyor\install_dependencies.bat # install poco
+- call %APPVEYOR_BUILD_FOLDER%\appveyor\install_dependencies.bat # install poco
 
 before_build:
 - cd %APPVEYOR_BUILD_FOLDER%
