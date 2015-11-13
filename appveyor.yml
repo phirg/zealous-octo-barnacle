@@ -14,13 +14,18 @@ clone_folder: c:\projects\zealous-octo-b
 init:
 - env
 - set POCO_INSTALL_PREFIX=%PROGRAMFILES%\Poco
-- set PATH=C:\MinGW\bin;%PATH%;%ProgramFiles(x86)%\Windows Kits\10\bin\x86;%POCO_INSTALL_PREFIX%\bin
+- set PATH=C:\MinGW\bin;%PATH%;%POCO_INSTALL_PREFIX%\bin
+# - set PATH=%PATH%;%ProgramFiles(x86)%\Windows Kits\10\bin\x86 # to be used if using MinGW
 
 environment:
   matrix:
   - GENERATOR: Visual Studio 11 2012 Win64
   - GENERATOR: Visual Studio 11 2012
-  - GENERATOR: MinGW Makefiles
+  - GENERATOR: Visual Studio 12 2013 Win64
+  - GENERATOR: Visual Studio 12 2013
+  - GENERATOR: Visual Studio 14 2015 Win64
+  - GENERATOR: Visual Studio 14 2015
+#  - GENERATOR: MinGW Makefiles  # poco is not compiling with this yet... (1.6.0)
 
 install:
 - if "%GENERATOR%"=="MinGW Makefiles" ( set SH_COMMAND=gulash.exe ) else ( set SH_COMMAND=sh.exe )
