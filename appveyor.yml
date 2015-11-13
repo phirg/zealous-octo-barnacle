@@ -23,7 +23,7 @@ environment:
   - GENERATOR: MinGW Makefiles
 
 install:
-- if "%GENERATOR%"=="MinGW Makefiles" ( del "%PROGRAMFILES%\Git\bin\sh.exe" )
+- if "%GENERATOR%"=="MinGW Makefiles" ( del "%PROGRAMFILES%\Git\bin\*sh.exe" )
 - ls "%PROGRAMFILES%\Git\bin"
 - c:\projects\zealous-octo-b\appveyor\install_dependencies.bat
 
