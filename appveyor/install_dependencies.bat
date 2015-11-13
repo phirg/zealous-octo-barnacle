@@ -13,7 +13,7 @@ echo "Poco is now cloned. "
 cd poco
 
 REM now using msys to make things easier
-sh -c "POCO_TAG_NAME=$(git describe --tags) ; git checkout $POCO_TAG_NAME"
+%SH_COMMAND% -c "POCO_TAG_NAME=$(git describe --tags) ; git checkout $POCO_TAG_NAME"
 
 REM build using cmake
 echo "building poco with cmake, configuration: %CONFIGURATION%" 
