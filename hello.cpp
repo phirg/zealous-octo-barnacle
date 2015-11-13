@@ -189,7 +189,7 @@ protected:
     
     void displayAbout()
     {
-        std::cout << about() << endl;        
+        std::cout << about() << std::endl;        
     }
 
 
