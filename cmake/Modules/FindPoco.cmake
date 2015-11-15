@@ -40,6 +40,13 @@ elseif ( )
     set ( _poco_components ${Poco_FIND_COMPONENTS} )
 endif ( )
 
+if ( Poco_FIND_VERSION )
+	message ( STATUS "Poco requested version is at least: ${Poco_FIND_VERSION}" )
+	if ( Poco_FIND_VERSION_EXACT )
+        message ( WARNING "findPoco: EXACT keyword is not supported")
+	endif ( Poco_FIND_VERSION_EXACT )
+endif ( Poco_FIND_VERSION )
+
 set ( _Poco_NOTFOUND_MESSAGE "" )
 
 # looking for general paths
@@ -82,6 +89,38 @@ else ( _poco_include_root STREQUAL "_poco_include_root-NOTFOUND" )
 #    endif ( )
 endif ( _poco_include_root STREQUAL "_poco_include_root-NOTFOUND" )
 
+# check version
+find_path ( 
+    _poco_version_h
+    Poco/Version.h
+    ${_poco_include_root} )
+
+if ( _poco_version_h STREQUAL "_poco_version_h-NOTFOUND" )
+	message ( STATUS "Version.h not found. Poco version < 1.4.0" ) 
+    set ( _poco_version_h "${_poco_include_root}/Poco/Foundation.h" )
+else ( )
+	message ( STATUS "Version.h found. Poco version >= 1.4.0" ) 
+    set ( _poco_version_h "${_poco_include_root}/Poco/Version.h" )
+endif ( )
+
+# parsing version
+file(STRINGS ${_poco_version_h} _contents REGEX "^#define POCO_VERSION 0x")
+if(_contents)
+    message ( STATUS "POCO_VERSION (hex) is: ${_contents}")
+    string(REGEX REPLACE ".*#define POCO_VERSION 0x[0-9]([0-9])[0-9ABD]*$" "\\1" Poco_VERSION_MAJOR "${_contents}")
+    string(REGEX REPLACE ".*#define POCO_VERSION 0x[0-9][0-9][0-9]([0-9])[0-9ABD]*$" "\\1" Poco_VERSION_MINOR "${_contents}")
+    string(REGEX REPLACE ".*#define POCO_VERSION 0x[0-9][0-9][0-9][0-9][0-9]([0-9])[0-9ABD]*$" "\\1" Poco_VERSION_PATCH "${_contents}")
+
+     set(Poco_VERSION "${Poco_VERSION_MAJOR}.${Poco_VERSION_MINOR}.${Poco_VERSION_PATCH}" )
+#     message ( STATUS "poco version is ${Poco_VERSION}")
+else()
+    set ( _Poco_NOTFOUND_MESSAGE "Include file ${_poco_version_h} does not contain expected version information")
+endif()
+
+if ( Poco_VERSION VERSION_LESS Poco_FIND_VERSION )
+	set ( _Poco_NOTFOUND_MESSAGE "Insufficient poco version" )
+    message ( STATUS "Poco version (${Poco_VERSION}) too low..." )
+endif ( )
 
 foreach ( module ${Poco_FIND_COMPONENTS} )
     message ( STATUS "Looking for poco component: ${module}" )
