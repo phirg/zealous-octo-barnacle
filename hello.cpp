@@ -7,7 +7,10 @@
 #include "Poco/Util/HelpFormatter.h"
 #include "Poco/Util/AbstractConfiguration.h"
 
-#include "Poco/Version.h" // FIXME to be included only for version >= 1.4.0
+#ifdef POCO_VERSION_H
+#include "Poco/Version.h" 
+#endif
+
 #include "Poco/NumberFormatter.h"
 
 using Poco::Util::Application;

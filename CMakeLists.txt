@@ -22,6 +22,11 @@ if ( NOT PocoUtil_FOUND )
     message (WARNING "Poco util not found")
 endif ( NOT PocoUtil_FOUND )
 
+
+if ( Poco_VERSION VERSION_GREATER "1.4.0" )
+	add_definitions ( -DPOCO_VERSION_H )
+endif ( )
+
 add_executable (hello hello.cpp)
 
 target_link_libraries(hello Poco::Foundation Poco::Util)
