@@ -44,8 +44,8 @@ build_script:
 
 test_script:
 - echo %PATH%
-- ctest -V --build-config %CONFIGURATION%
-- ctest --no-compress-output -T Test || verify > NUL
+#- ctest -V --build-config %CONFIGURATION%
+- ctest --no-compress-output -T Test --build-config %CONFIGURATION% || verify > NUL
 - pw: iex ((new-object net.webClient).UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\Testing\*\Test.xml))
 
 on_finish:
