@@ -47,8 +47,10 @@ test_script:
 #- ctest -V --build-config %CONFIGURATION%
 - ctest -V --no-compress-output -T Test --build-config %CONFIGURATION% || verify > NUL
 - ps: '$($env:APPVEYOR_JOB_ID)'
+- ps: '$env:APPVEYOR_JOB_ID'
 - ps: (Resolve-Path .\Testing\*\Test.xml)
-- ps: (new-object net.webClient).UploadFile('https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)', (Resolve-Path .\Testing\*\Test.xml))
+- ps: (new-object net.webClient).UploadFile('https://ci.appveyor.com/api/testresults/xunit/$env:APPVEYOR_JOB_ID', (Resolve-Path .\Testing\*\Test.xml))
+- ps: $wc = New-Object 'System.Net.WebClient'; $wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\Testing\*\Test.xml))
 
 on_finish:
 - ps: '$blockRdp = $true; iex ((new-object net.webclient).DownloadString(''https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1''))'
