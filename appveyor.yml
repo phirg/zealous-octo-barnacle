@@ -6,7 +6,7 @@ branches:
 
 configuration: 
 - Release
-- RelWithDebInfo
+#- RelWithDebInfo
 - Debug
 
 clone_folder: c:\projects\zealous-octo-b
@@ -21,8 +21,8 @@ environment:
   matrix:
   - GENERATOR: Visual Studio 11 2012 Win64
   - GENERATOR: Visual Studio 11 2012
-  - GENERATOR: Visual Studio 12 2013 Win64
-  - GENERATOR: Visual Studio 12 2013
+#  - GENERATOR: Visual Studio 12 2013 Win64
+#  - GENERATOR: Visual Studio 12 2013
   - GENERATOR: Visual Studio 14 2015 Win64
   - GENERATOR: Visual Studio 14 2015
 #  - GENERATOR: MinGW Makefiles  # poco is not compiling with this yet... (1.6.0)
@@ -47,6 +47,7 @@ test_script:
 #- ctest -V --build-config %CONFIGURATION%
 - ctest -V --no-compress-output -T Test --build-config %CONFIGURATION% || verify > NUL
 - ps: '$($env:APPVEYOR_JOB_ID)'
+- ps: (Resolve-Path .\Testing\*\Test.xml)
 - ps: (new-object net.webClient).UploadFile('https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)', (Resolve-Path .\Testing\*\Test.xml))
 
 on_finish:
