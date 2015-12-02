@@ -29,7 +29,28 @@ endif ( )
 
 add_executable (hello hello.cpp)
 
-target_link_libraries(hello Poco::Foundation Poco::Util)
+# find python
+# If you'd like to specify the installation of Python to use, you should
+# modify the following cache variables:
+#   PYTHON_LIBRARY             - path to the python library
+#   PYTHON_INCLUDE_DIR         - path to where Python.h is found
+find_package ( PythonLibs 2.7 )
+
+if ( NOT PYTHONLIBS_FOUND ) 
+    message ( WARNING "Python not found" )
+# require cmake >= 2.8.8 to use PYTHONLIBS_VERSION_STRING
+elseif ( NOT PYTHONLIBS_VERSION_STRING MATCHES "^2\\.7\\." )
+	message ( WARNING "Python version 2.7 not found. Found: ${PYTHONLIBS_VERSION_STRING}. ")
+else ( NOT PYTHONLIBS_FOUND )
+    add_definitions ( -DHAVE_PYTHON27 )
+    message ( STATUS "Python libraries are: ${PYTHON_LIBRARIES}" )
+    message ( STATUS "Python include path is: ${PYTHON_INCLUDE_DIRS}" )
+    message ( STATUS "Python full version is: ${PYTHONLIBS_VERSION_STRING}" )
+    include_directories ( ${PYTHON_INCLUDE_DIRS} )
+    target_link_libraries(hello ${PYTHON_LIBRARIES})
+endif ( NOT PYTHONLIBS_FOUND ) 
+
+target_link_libraries(hello Poco::Foundation Poco::Util ${PYTHON_LIBRARIES})
 
 message ( STATUS "cmake running....")
 
